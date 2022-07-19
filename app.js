@@ -9,7 +9,7 @@ const setId = () => {
 }
 
 const addCategory = (e) => {
-    const parent = e.target.parentElement;
+    const parent = e.target.id === 'mainAddButton' ? e.target.parentElement : document.getElementById(e.target.id.slice(6));
     const newId = setId();
 
     const addForm = document.createElement('form',);
@@ -21,14 +21,17 @@ const addCategory = (e) => {
     submit.innerText = "ok";
     submit.type = "submit";
     cancel.type = "button";
-    cancel.innerText = "-";
+    cancel.innerText = "X";
     addForm.append(input, submit, cancel);
     parent.append(addForm);
     input.focus();
 
     const confirmAdding = (e) => {
         e.preventDefault()
-
+        if (input.value === '') {
+            alert("Category name can not be empty");
+            return;
+        }
         const form = document.getElementById(newId);
         form.parentElement.removeChild(form);
 
@@ -37,13 +40,71 @@ const addCategory = (e) => {
         newCategory.id = newId;
         const span = document.createElement('span');
         span.innerText = input.value;
+        span.id = 'span' + newId;
+        const controls = document.createElement('div');
+        controls.id = 'controls' + newId;
+        controls.classList.add('controls');
 
-        const btn = document.createElement('button');
-        btn.addEventListener('click', addCategory)
-        btn.innerText = '+';
-        btn.addEventListener('click', addCategory)
+        const addBtn = document.createElement('button');
+        addBtn.innerText = '+';
+        addBtn.id = 'addBtn' + newId;
+        addBtn.addEventListener('click', addCategory)
 
-        newCategory.append(span, btn);
+
+        const editCategory = (e) => {
+            const category = document.getElementById(newId);
+            span.classList.add('isEditing');
+            controls.classList.add('isEditing');
+
+            const editForm = document.createElement('form');
+            editForm.classList.add('editForm');
+            const input = document.createElement('input');
+            input.value = category.firstElementChild.innerText;
+
+            const confirmEditBtn = document.createElement('button');
+            confirmEditBtn.innerText = 'ok';
+            confirmEditBtn.type = 'submit';
+
+            const confirmEdit = (e) => {
+                e.preventDefault();
+                span.innerText = input.value;
+                span.classList.remove('isEditing');
+                controls.classList.remove('isEditing');
+                category.removeChild(editForm);
+            }
+            confirmEditBtn.addEventListener('click', confirmEdit);
+
+            const cancelEditBtn = document.createElement('button');
+            cancelEditBtn.type = 'button';
+            cancelEditBtn.innerText = 'X'
+            const cancelEdit = (e) => {
+                e.preventDefault();
+                span.classList.remove('isEditing');
+                controls.classList.remove('isEditing');
+                category.removeChild(editForm);
+            }
+            cancelEditBtn.addEventListener('click', cancelEdit);
+
+            editForm.append(input, confirmEditBtn, cancelEditBtn);
+            category.insertAdjacentElement("afterbegin", editForm);
+            input.focus()
+        };
+
+        const editBtn = document.createElement('button');
+        editBtn.innerText = '/';
+        editBtn.addEventListener('click', editCategory);
+
+
+        const deleteCategory = () => {
+            const category = document.getElementById(newId);
+            category.parentElement.removeChild(category);
+        };
+        const deleteBtn = document.createElement('button');
+        deleteBtn.innerText = '-';
+        deleteBtn.addEventListener('click', deleteCategory);
+
+        controls.append(addBtn, editBtn, deleteBtn)
+        newCategory.append(span, controls);
         parent.append(newCategory)
     }
     const cancelAdding = (e) => {
