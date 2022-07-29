@@ -8,12 +8,33 @@
 		<link rel="stylesheet" href="./style.css" />
 	</head>
 	<body>
+		<div id="mainControls">
+			<div id="sizeControl">
+				<button id="reducer" class="sizeControl">-10%</button>
+				<select id="sizeSelector" class="sizeControl">
+					<option value="50.0">50%</option>
+					<option value="60.0">60%</option>
+					<option value="70.0">70%</option>
+					<option value="80.0">80%</option>
+					<option value="90.0">90%</option>
+					<option value="100.0" selected>100%</option>
+					<option value="110.0">110%</option>
+					<option value="120.0">120%</option>
+					<option value="130.0">130%</option>
+					<option value="140.0">140%</option>
+					<option value="150.0">150%</option>
+				</select>
+				<button id="enlarger" class="sizeControl">+10%</button>
+			</div>
+		</div>
 		<div id="mainContainer">
 			<div id="mainCategory" class="item">
 				<span>Categories</span>
 				<button id="mainAddButton">+</button>
 			</div>
 		</div>
+		<script src="sizeChanger.js"></script>
 		<script src="./app.js"></script>
+		<script src="./movement.js"></script>
 	</body>
 </html>

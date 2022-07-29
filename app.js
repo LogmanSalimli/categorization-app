@@ -18,10 +18,12 @@ const addCategory = (e) => {
     const submit = document.createElement('button');
     const cancel = document.createElement('button');
     input.placeholder = "Enter name";
-    submit.innerText = "ok";
+    submit.innerHTML = "&#x2713;";
     submit.type = "submit";
+    submit.classList.add("confirmBtn");
     cancel.type = "button";
-    cancel.innerText = "X";
+    cancel.classList.add("cancelBtn")
+    cancel.innerHTML = "&#xD7;";
     addForm.append(input, submit, cancel);
     parent.append(addForm);
     input.focus();
@@ -48,8 +50,8 @@ const addCategory = (e) => {
         const addBtn = document.createElement('button');
         addBtn.innerText = '+';
         addBtn.id = 'addBtn' + newId;
+        addBtn.classList.add("addBtn")
         addBtn.addEventListener('click', addCategory)
-
 
         const editCategory = (e) => {
             const category = document.getElementById(newId);
@@ -62,7 +64,8 @@ const addCategory = (e) => {
             input.value = category.firstElementChild.innerText;
 
             const confirmEditBtn = document.createElement('button');
-            confirmEditBtn.innerText = 'ok';
+            confirmEditBtn.classList.add("confirmBtn");
+            confirmEditBtn.innerHTML = "&#x2713;";
             confirmEditBtn.type = 'submit';
 
             const confirmEdit = (e) => {
@@ -75,8 +78,9 @@ const addCategory = (e) => {
             confirmEditBtn.addEventListener('click', confirmEdit);
 
             const cancelEditBtn = document.createElement('button');
+            cancelEditBtn.classList.add("cancelBtn");
             cancelEditBtn.type = 'button';
-            cancelEditBtn.innerText = 'X'
+            cancelEditBtn.innerHTML = "&#xD7;";
             const cancelEdit = (e) => {
                 e.preventDefault();
                 span.classList.remove('isEditing');
@@ -92,15 +96,16 @@ const addCategory = (e) => {
 
         const editBtn = document.createElement('button');
         editBtn.innerText = '/';
+        editBtn.classList.add("editBtn");
         editBtn.addEventListener('click', editCategory);
-
 
         const deleteCategory = () => {
             const category = document.getElementById(newId);
             category.parentElement.removeChild(category);
         };
         const deleteBtn = document.createElement('button');
-        deleteBtn.innerText = '-';
+        deleteBtn.textContent = '-';
+        deleteBtn.classList.add("deleteBtn");
         deleteBtn.addEventListener('click', deleteCategory);
 
         controls.append(addBtn, editBtn, deleteBtn)
@@ -113,13 +118,9 @@ const addCategory = (e) => {
         form.parentElement.removeChild(form);
     }
 
-
     addForm.addEventListener('submit', confirmAdding);
     cancel.addEventListener('click', cancelAdding);
-
     parent.className = parent.className === 'item' || 'container' ? 'container' : 'item';
-
-
 }
 
 mainAddButton.addEventListener('click', addCategory);
