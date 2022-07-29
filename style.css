@@ -1,18 +1,25 @@
 body {
 	background-color: beige;
+	font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 }
-#mainContainer {
+
+/* #mainContainer {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	min-height: 95vh;
 	width: 100%;
-}
+    
+} */
 
 .item,
 .container,
 form {
 	display: list-item;
+	white-space: nowrap;
+}
+#mainCategory {
+	display: block;
 }
 
 #mainContainer span,
@@ -54,10 +61,95 @@ form {
 	display: none !important;
 }
 
-.controls button {
-	margin-left: 0.1rem;
+.controls button,
+form button {
+	margin-left: 0.2rem;
 }
 .editForm {
 	display: inline-block;
 	margin-left: 0;
+}
+button {
+	cursor: pointer;
+}
+
+.confirmBtn {
+	font-size: 1rem;
+	font-weight: bold;
+	color: green;
+	background: none;
+	height: 1.5rem;
+	width: 1.5rem;
+	border-radius: 1.5rem;
+	border: solid 1px green;
+}
+.confirmBtn:hover {
+	color: beige;
+	background-color: green;
+	transition-duration: 300ms;
+}
+.cancelBtn {
+	font-size: 1rem;
+	font-weight: bold;
+	color: slategray;
+	background: none;
+	height: 1.5rem;
+	width: 1.5rem;
+	border-radius: 1.5rem;
+	border: solid 1px slategray;
+}
+.cancelBtn:hover {
+	color: beige;
+	background: slategray;
+	transition: 300ms;
+}
+.editBtn {
+	font-weight: bold;
+	color: orange;
+	background: none;
+	height: 1.5rem;
+	width: 1.5rem;
+	border-radius: 1.5rem;
+	border: solid 1px orange;
+}
+.editBtn:hover {
+	color: beige;
+	background: orange;
+	transition: 300ms;
+}
+.deleteBtn {
+	font-weight: bold;
+	color: red;
+	background: none;
+	height: 1.5rem;
+	width: 1.5rem;
+	border-radius: 1.5rem;
+	border: solid 1px red;
+}
+.deleteBtn:hover {
+	color: beige;
+	background: red;
+	transition: 300ms;
+}
+
+/* Size Changer Style: */
+html {
+	transition-duration: 300ms;
+}
+
+.sizeControl {
+	background-color: lightblue;
+	border: solid rgb(110, 141, 138) 1px;
+	border-radius: 5px;
+	padding: 3px 7px;
+	height: 25px;
+}
+
+#sizeControl {
+	position: fixed;
+	right: 10vmin;
+}
+
+#mainControls {
+	font-size: small;
 }
